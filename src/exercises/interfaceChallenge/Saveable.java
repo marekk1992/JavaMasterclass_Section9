@@ -1,9 +1,9 @@
 package exercises.interfaceChallenge;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public interface Saveable {
 
-    ArrayList valuesToBeSaved();
-    void assignValues(ArrayList fields);
+    List<String> write();
+    void read(List<String> fields);
 }

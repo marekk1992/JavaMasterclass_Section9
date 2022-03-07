@@ -1,6 +1,7 @@
 package exercises.interfaceChallenge;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Player implements Saveable {
 
@@ -9,6 +10,10 @@ public class Player implements Saveable {
     private int health = 100;
     private int defence = 50;
 
+    public Player() {
+
+    }
+
     public Player(String name, int damage, int health, int defence) {
         this.name = name;
         this.damage = damage;
@@ -16,35 +21,29 @@ public class Player implements Saveable {
         this.defence = defence;
     }
 
-    public Player() {
+    @Override
+    public List<String> write() {
+        List<String> newList = new ArrayList<>();
+        newList.add(name);
+        newList.add(Integer.valueOf(damage).toString());
+        newList.add(Integer.valueOf(health).toString());
+        newList.add(Integer.valueOf(defence).toString());
+        return newList;
     }
 
     @Override
-    public ArrayList valuesToBeSaved() {
-        ArrayList parameters = new ArrayList<>();
-        parameters.add(name);
-        parameters.add(damage);
-        parameters.add(health);
-        parameters.add(defence);
-
-        return parameters;
-    }
-
-    @Override
-    public void assignValues(ArrayList fields) {
-        if (fields.isEmpty()) {
-            System.out.println("Can`t assign value. List is empty.");
-        } else {
-            name = fields.get(0).toString();
-            damage = Integer.valueOf(fields.get(1).toString());
-            health = Integer.valueOf(fields.get(2).toString());
-            defence = Integer.valueOf(fields.get(3).toString());
+    public void read(List<String> fields) {
+        if (fields != null) {
+            name = fields.get(0);
+            damage = Integer.parseInt(fields.get(1));
+            health = Integer.parseInt(fields.get(2));
+            defence = Integer.parseInt(fields.get(3));
         }
     }
 
     @Override
     public String toString() {
-        return "Player " + name + " has these attributes: health - " + health + ", damage - "
-                + damage + ", defence - " + defence;
+        return "Player '" + name + "' has these attributes: health=" + health + ", damage="
+                + damage + ", defence=" + defence;
     }
 }

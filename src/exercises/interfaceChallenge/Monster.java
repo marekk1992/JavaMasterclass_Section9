@@ -1,6 +1,7 @@
 package exercises.interfaceChallenge;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Monster implements Saveable {
 
@@ -11,6 +12,7 @@ public class Monster implements Saveable {
     private int defence = 50;
 
     public Monster() {
+
     }
 
     public Monster(String name, String type, int damage, int health, int defence) {
@@ -22,33 +24,30 @@ public class Monster implements Saveable {
     }
 
     @Override
-    public ArrayList valuesToBeSaved() {
-        ArrayList parameters = new ArrayList<>();
-        parameters.add(name);
-        parameters.add(type);
-        parameters.add(damage);
-        parameters.add(health);
-        parameters.add(defence);
-
-        return parameters;
+    public List<String> write() {
+        List<String> newList = new ArrayList<>();
+        newList.add(name);
+        newList.add(type);
+        newList.add(Integer.valueOf(damage).toString());
+        newList.add(Integer.valueOf(health).toString());
+        newList.add(Integer.valueOf(defence).toString());
+        return newList;
     }
 
     @Override
-    public void assignValues(ArrayList fields) {
-        if (fields.isEmpty()) {
-            System.out.println("Can`t assign value. List is empty.");
-        } else {
-            name = fields.get(0).toString();
-            type = fields.get(1).toString();
-            damage = Integer.valueOf(fields.get(2).toString());
-            health = Integer.valueOf(fields.get(3).toString());
-            defence = Integer.valueOf(fields.get(4).toString());
+    public void read(List<String> fields) {
+        if (fields != null) {
+            name = fields.get(0);
+            type = fields.get(1);
+            damage = Integer.parseInt(fields.get(2));
+            health = Integer.parseInt(fields.get(3));
+            defence = Integer.parseInt(fields.get(4));
         }
     }
 
     @Override
     public String toString() {
-        return "Monster " + name + " from class - " + type + " has these attributes: health - "
-                + health + ", damage - " + damage + ", defence - " + defence;
+        return "Monster '" + name + "' from class='" + type + "' has these attributes: health="
+                + health + ", damage=" + damage + ", defence=" + defence;
     }
 }
