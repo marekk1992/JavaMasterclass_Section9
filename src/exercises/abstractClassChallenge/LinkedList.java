@@ -1,38 +1,39 @@
 package exercises.abstractClassChallenge;
 
-public class LinkedList {
+public class LinkedList implements DataStructure {
 
     private ListItem head;
 
-    public void addToList(ListItem listItem) {
+    public void addItem(ListItem listItem) {
         if (head == null) {
             head = listItem;
-            System.out.println("Item <" + listItem.value + "> added to the list.");
+            System.out.println("Item <" + listItem.getValue() + "> added to the list.");
         } else {
             ListItem checkedItem = head;
             boolean isAdded = false;
             while (!isAdded) {
                 if (checkedItem.compareTo(listItem) == 0) {
-                    System.out.println("Item <" + listItem.value + "> already exists in a list. " +
+                    System.out.println("Item <" + listItem.getValue() + "> already exists in a list. " +
                             "Addition failed.");
-                    isAdded = true;
+                    return;
                 } else if (checkedItem.compareTo(listItem) > 0) {
                     listItem.setRightItem(checkedItem);
                     head = listItem;
                     checkedItem.setLeftItem(listItem);
-                    System.out.println("Item <" + listItem.value + "> added to the list.");
+                    System.out.println("Item <" + listItem.getValue() + "> added to the list.");
                     isAdded = true;
                 } else {
                     if (checkedItem.rightItem == null) {
                         checkedItem.setRightItem(listItem);
                         listItem.setLeftItem(checkedItem);
-                        System.out.println("Item <" + listItem.value + "> added to the list.");
+                        System.out.println("Item <" + listItem.getValue() + "> added to the list.");
                         isAdded = true;
                     } else if (checkedItem.rightItem.compareTo(listItem) > 0) {
                         listItem.setRightItem(checkedItem.rightItem);
                         checkedItem.setRightItem(listItem);
                         listItem.setLeftItem(checkedItem);
-                        System.out.println("Item <" + listItem.value + "> added to the list.");
+                        checkedItem.rightItem.setLeftItem(listItem);
+                        System.out.println("Item <" + listItem.getValue() + "> added to the list.");
                         isAdded = true;
                     }
                 }
@@ -41,36 +42,44 @@ public class LinkedList {
         }
     }
 
-    public void removeFromTheList(ListItem listItem) {
+    public void removeItem(ListItem listItem) {
         if (head == null) {
             System.out.println("List is empty.");
         }
         ListItem itemToRemove = findItem(listItem);
         if (itemToRemove == null) {
-            System.out.println("Can`t find item <" + listItem.value + "> in the list.");
-        } else if (itemToRemove.leftItem == null) {
+            System.out.println("Can`t find item <" + listItem.getValue() + "> in the list.");
+        } else if (isHead(itemToRemove)) {
             if (itemToRemove.rightItem != null) {
+                itemToRemove.setLeftItem(null);
                 head = itemToRemove.rightItem;
-                System.out.println("Item <" + itemToRemove.value + "> removed from the list.");
+                System.out.println("Item <" + itemToRemove.getValue() + "> removed from the list.");
             } else {
                 head = null;
-                System.out.println("Item <" + itemToRemove.value + "> removed from the list. "
+                System.out.println("Item <" + itemToRemove.getValue() + "> removed from the list. "
                         + "List is empty now.");
             }
         } else if (itemToRemove.rightItem == null) {
             if (itemToRemove.leftItem != null) {
                 itemToRemove.leftItem.setRightItem(null);
-                System.out.println("Item <" + itemToRemove.value + "> removed from the list.");
+                itemToRemove.setLeftItem(null);
+                System.out.println("Item <" + itemToRemove.getValue() + "> removed from the list.");
             } else {
                 head = null;
-                System.out.println("Item <" + itemToRemove.value + "> removed from the list. "
+                System.out.println("Item <" + itemToRemove.getValue() + "> removed from the list. "
                         + "List is empty now.");
             }
         } else {
             itemToRemove.leftItem.setRightItem(itemToRemove.rightItem);
             itemToRemove.rightItem.setLeftItem(itemToRemove.leftItem);
-            System.out.println("Item <" + itemToRemove.value + "> removed from the list.");
+            itemToRemove.setLeftItem(null);
+            itemToRemove.setRightItem(null);
+            System.out.println("Item <" + itemToRemove.getValue() + "> removed from the list.");
         }
+    }
+
+    private boolean isHead(ListItem listItem) {
+        return listItem.compareTo(head) == 0;
     }
 
     private ListItem findItem(ListItem listItem) {
@@ -84,7 +93,7 @@ public class LinkedList {
         return null;
     }
 
-    public void printList() {
+    public void printItems() {
         printNextItem(head);
     }
 
@@ -92,7 +101,7 @@ public class LinkedList {
         if (listItem == null) {
             return;
         }
-        System.out.println(listItem.value);
+        System.out.println(listItem.getValue());
         printNextItem(listItem.rightItem);
     }
 }

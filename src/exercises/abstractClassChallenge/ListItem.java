@@ -2,8 +2,9 @@ package exercises.abstractClassChallenge;
 
 public abstract class ListItem {
 
-    ListItem rightItem, leftItem;
-    Object value;
+    ListItem rightItem;
+    ListItem leftItem;
+    private Object value;
 
     public ListItem(Object value) {
         this.value = value;
@@ -14,4 +15,8 @@ public abstract class ListItem {
     public abstract void setRightItem(ListItem listItem);
     public abstract void setLeftItem(ListItem listItem);
     public abstract int compareTo(ListItem listItem);
+
+    public Object getValue() {
+        return value;
+    }
 }

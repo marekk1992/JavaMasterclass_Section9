@@ -28,8 +28,8 @@ public class Item extends ListItem {
 
     @Override
     public int compareTo(ListItem listItem) {
-        String existingItem = value.toString();
-        String itemToBeAdded = listItem.value.toString();
+        String existingItem = getValue().toString();
+        String itemToBeAdded = listItem.getValue().toString();
         return existingItem.compareTo(itemToBeAdded);
     }
 }

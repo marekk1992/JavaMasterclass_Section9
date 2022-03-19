@@ -2,8 +2,7 @@ package exercises.abstractClassChallenge;
 
 public class Main {
 
-    public static LinkedList linkedList = new LinkedList();
-    public static BinaryTree binaryTree = new BinaryTree();
+    public static DataStructure myDataStructure = new BinaryTree();
 
     public static void main(String[] args) {
 
@@ -14,31 +13,23 @@ public class Main {
         Item fifthItem = new Item(0.5);
         Item sixthItem = new Item(3);
 
-        linkedList.addToList(firstItem);
-        linkedList.addToList(secondItem);
-        linkedList.addToList(thirdItem);
-        linkedList.addToList(fourthItem);
-        linkedList.addToList(fifthItem);
-        linkedList.addToList(sixthItem);
+        myDataStructure.addItem(firstItem);
+        myDataStructure.addItem(secondItem);
+        myDataStructure.addItem(thirdItem);
+        myDataStructure.addItem(fourthItem);
+        myDataStructure.addItem(fifthItem);
+        myDataStructure.addItem(sixthItem);
 
-        linkedList.printList();
+        myDataStructure.printItems();
 
-        linkedList.removeFromTheList(secondItem);
-        linkedList.removeFromTheList(firstItem);
-        linkedList.removeFromTheList(thirdItem);
-        linkedList.removeFromTheList(fourthItem);
-        linkedList.removeFromTheList(sixthItem);
-        linkedList.removeFromTheList(fifthItem);
+        myDataStructure.removeItem(secondItem);
+        myDataStructure.removeItem(firstItem);
+        myDataStructure.removeItem(thirdItem);
+        myDataStructure.removeItem(fourthItem);
+        myDataStructure.removeItem(sixthItem);
+        myDataStructure.removeItem(fifthItem);
 
-        linkedList.printList();
+        myDataStructure.printItems();
 
-//        binaryTree.addToBinaryTree(firstItem);
-//        binaryTree.addToBinaryTree(secondItem);
-//        binaryTree.addToBinaryTree(thirdItem);
-//        binaryTree.addToBinaryTree(fourthItem);
-//        binaryTree.addToBinaryTree(fifthItem);
-//        binaryTree.addToBinaryTree(sixthItem);
-//
-//        binaryTree.printBinaryTree();
     }
 }
