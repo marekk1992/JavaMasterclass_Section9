@@ -2,37 +2,16 @@ package exercises.abstractClassChallenge;
 
 public abstract class ListItem {
 
-    private ListItem nextItem;
-    private ListItem previousItem;
-    private double value;
+    ListItem rightItem, leftItem;
+    Object value;
 
-    public ListItem(double value) {
+    public ListItem(Object value) {
         this.value = value;
     }
 
-    public abstract ListItem moveToNextItem();
-    public abstract ListItem moveToPreviousItem();
+    public abstract ListItem moveToRightItem();
+    public abstract ListItem moveToLeftItem();
+    public abstract void setRightItem(ListItem listItem);
+    public abstract void setLeftItem(ListItem listItem);
     public abstract int compareTo(ListItem listItem);
-
-    public double getValue() {
-        return value;
-    }
-
-    public void setNextItem(ListItem nextItem) {
-        this.nextItem = nextItem;
-    }
-
-    public void setPreviousItem(ListItem previousItem) {
-        this.previousItem = previousItem;
-    }
-
-    public ListItem getNextItem() {
-        return nextItem;
-    }
-
-    public ListItem getPreviousItem() {
-        return previousItem;
-    }
-
-
 }

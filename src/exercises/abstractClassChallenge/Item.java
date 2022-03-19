@@ -2,38 +2,34 @@ package exercises.abstractClassChallenge;
 
 public class Item extends ListItem {
 
-    public Item(double value) {
+    public Item(Object value) {
         super(value);
     }
 
     @Override
-    public ListItem moveToNextItem() {
-        return this.getNextItem();
+    public ListItem moveToRightItem() {
+        return rightItem;
     }
 
     @Override
-    public ListItem moveToPreviousItem() {
-        return this.getPreviousItem();
+    public ListItem moveToLeftItem() {
+        return leftItem;
     }
 
     @Override
-    public void setNextItem(ListItem nextItem) {
-        super.setNextItem(nextItem);
+    public void setRightItem(ListItem nextItem) {
+        this.rightItem = nextItem;
     }
 
     @Override
-    public void setPreviousItem(ListItem previousItem) {
-        super.setPreviousItem(previousItem);
+    public void setLeftItem(ListItem previousItem) {
+        this.leftItem = previousItem;
     }
 
     @Override
     public int compareTo(ListItem listItem) {
-        if (getValue() == listItem.getValue()) {
-            return 0;
-        } else if (getValue() > listItem.getValue()) {
-            return 1;
-        } else {
-            return -1;
-        }
+        String existingItem = value.toString();
+        String itemToBeAdded = listItem.value.toString();
+        return existingItem.compareTo(itemToBeAdded);
     }
 }
